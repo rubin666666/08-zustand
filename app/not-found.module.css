@@ -1,0 +1,21 @@
+.wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 32px 16px;
+}
+
+.title {
+  margin: 0 0 16px;
+  font-size: 36px;
+  color: #212529;
+}
+
+.description {
+  margin: 0;
+  font-size: 18px;
+  color: #6c757d;
+  text-align: center;
+}

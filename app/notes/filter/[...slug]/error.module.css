@@ -1,0 +1,22 @@
+.wrapper {
+  padding: 24px;
+}
+
+.title {
+  margin: 0 0 12px;
+  color: #212529;
+}
+
+.message {
+  margin: 0 0 16px;
+  color: #495057;
+}
+
+.button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  background-color: #0d6efd;
+  color: #fff;
+  cursor: pointer;
+}
