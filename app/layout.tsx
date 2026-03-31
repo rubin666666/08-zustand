@@ -4,7 +4,13 @@ import { Roboto } from "next/font/google";
 import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
 import TanStackProvider from "@/components/TanStackProvider/TanStackProvider";
-import { APP_DESCRIPTION, APP_NAME, createSeoMetadata } from "@/lib/seo";
+import {
+  APP_DESCRIPTION,
+  APP_NAME,
+  OG_IMAGE,
+  getMetadataBase,
+  getSiteUrl,
+} from "@/lib/seo";
 
 import "./globals.css";
 
@@ -16,16 +22,25 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ??
-      (process.env.VERCEL_PROJECT_PRODUCTION_URL
-        ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-        : "http://localhost:3000"),
-  ),
-  ...createSeoMetadata({
+  metadataBase: getMetadataBase(),
+  title: APP_NAME,
+  description: APP_DESCRIPTION,
+  alternates: {
+    canonical: getSiteUrl("/"),
+  },
+  openGraph: {
     title: APP_NAME,
     description: APP_DESCRIPTION,
-  }),
+    url: getSiteUrl("/"),
+    images: [
+      {
+        url: OG_IMAGE,
+        width: 1200,
+        height: 630,
+        alt: `${APP_NAME} Open Graph image`,
+      },
+    ],
+  },
 };
 
 interface RootLayoutProps {

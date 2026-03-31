@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 
 import { NOTES_PER_PAGE, notesListQueryOptions } from "@/lib/api";
 import { createQueryClient } from "@/lib/query-client";
-import { createSeoMetadata } from "@/lib/seo";
+import { OG_IMAGE, getSiteUrl } from "@/lib/seo";
 import type { NoteTag } from "@/types/note";
 
 import NotesPageClient from "./Notes.client";
@@ -52,12 +52,28 @@ export async function generateMetadata({
   const { slug } = await params;
   const activeTag = parseTag(slug);
   const filterLabel = activeTag === "all" ? "all notes" : `${activeTag} notes`;
+  const url = getSiteUrl(`/notes/filter/${slug.join("/")}`);
 
-  return createSeoMetadata({
+  return {
     title: `${filterLabel} | NoteHub`,
     description: `Browse ${filterLabel} in NoteHub and quickly find the notes you need.`,
-    path: `/notes/filter/${slug.join("/")}`,
-  });
+    alternates: {
+      canonical: url,
+    },
+    openGraph: {
+      title: `${filterLabel} | NoteHub`,
+      description: `Browse ${filterLabel} in NoteHub and quickly find the notes you need.`,
+      url,
+      images: [
+        {
+          url: OG_IMAGE,
+          width: 1200,
+          height: 630,
+          alt: `${filterLabel} Open Graph image`,
+        },
+      ],
+    },
+  };
 }
 
 export default async function NotesByTagPage({
