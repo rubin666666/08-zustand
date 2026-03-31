@@ -59,7 +59,7 @@ export default function NoteForm() {
   };
 
   return (
-    <form action={handleSubmit} className={css.form}>
+    <form className={css.form}>
       <label className={css.formGroup}>
         <span className={css.label}>Title</span>
         <input
@@ -118,6 +118,7 @@ export default function NoteForm() {
         <button
           type="submit"
           className={css.submitButton}
+          formAction={handleSubmit}
           disabled={createNoteMutation.isPending}
         >
           {createNoteMutation.isPending ? "Saving..." : "Save note"}
